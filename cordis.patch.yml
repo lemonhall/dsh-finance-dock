@@ -28,28 +28,84 @@
         refreshMs: 60000
         # 涨跌配色：cn = 红涨绿跌（中式），intl = 绿涨红跌
         colorScheme: 'cn'
-        # 监视列表：group → items。symbol 用 Yahoo 的代码
+        # 监视列表：group → items，symbol 用 Yahoo 代码。
+        # 分类与标的照搬「经纬雷达」的 api/lib/catalog.js（本机 E:\development\macro-market-radar），
+        # 它那 13 类共 44 个 Yahoo 标的，这里按同样口径铺开。
         groups:
-          - title: 股市
+          - title: 全球股市
             items:
               - { symbol: '^GSPC', label: '标普500' }
-              - { symbol: '^IXIC', label: '纳斯达克' }
+              - { symbol: '^IXIC', label: '纳斯达克综合' }
+              - { symbol: '^DJI', label: '道琼斯' }
+              - { symbol: '^RUT', label: '罗素2000' }
+              - { symbol: '^VIX', label: 'VIX 恐慌指数' }
+              - { symbol: '^STOXX', label: '欧洲 STOXX 600' }
               - { symbol: '^N225', label: '日经225' }
+              - { symbol: '^NSEI', label: '印度 Nifty 50' }
+          - title: 美股七姐妹
+            items:
+              - { symbol: 'AAPL', label: '苹果' }
+              - { symbol: 'MSFT', label: '微软' }
+              - { symbol: 'GOOGL', label: '谷歌 A' }
+              - { symbol: 'AMZN', label: '亚马逊' }
+              - { symbol: 'NVDA', label: '英伟达' }
+              - { symbol: 'META', label: 'Meta' }
+              - { symbol: 'TSLA', label: '特斯拉' }
+          - title: 中美温度
+            items:
+              - { symbol: '000001.SS', label: '上证综指' }
               - { symbol: '^HSI', label: '恒生指数' }
-              - { symbol: '000001.SS', label: '上证指数' }
-          - title: 商品
-            items:
-              - { symbol: 'GC=F', label: '黄金' }
-              - { symbol: 'CL=F', label: 'WTI 原油' }
-          - title: 汇率
-            items:
-              - { symbol: 'CNY=X', label: '美元/人民币' }
-              - { symbol: 'EURUSD=X', label: '欧元/美元' }
-              - { symbol: 'DX-Y.NYB', label: '美元指数' }
-          - title: 加密
-            items:
-              - { symbol: 'BTC-USD', label: 'BTC' }
-              - { symbol: 'ETH-USD', label: 'ETH' }
-          - title: 利率
+              - { symbol: 'ASHR', label: '沪深300 ETF' }
+              - { symbol: 'MCHI', label: '中国大盘股 ETF' }
+          - title: 债市与信用
             items:
               - { symbol: '^TNX', label: '美债10Y收益率' }
+              - { symbol: '^MOVE', label: 'MOVE 债券波动率' }
+              - { symbol: 'HYG', label: '高收益债 ETF' }
+          - title: 金属
+            items:
+              - { symbol: 'GC=F', label: '黄金' }
+              - { symbol: 'SI=F', label: '白银' }
+              - { symbol: 'HG=F', label: '铜' }
+          - title: 能源
+            items:
+              - { symbol: 'CL=F', label: 'WTI 原油' }
+              - { symbol: 'BZ=F', label: '布伦特原油' }
+              - { symbol: 'NG=F', label: '美国天然气' }
+          - title: 汇率
+            items:
+              - { symbol: 'DX-Y.NYB', label: '美元指数' }
+              - { symbol: 'USDJPY=X', label: '美元/日元' }
+              - { symbol: 'USDCNY=X', label: '美元/人民币' }
+              - { symbol: 'EURUSD=X', label: '欧元/美元' }
+          - title: 半导体
+            items:
+              - { symbol: '^SOX', label: '费城半导体' }
+              - { symbol: 'SMH', label: '半导体 ETF' }
+              - { symbol: 'TSM', label: '台积电 ADR' }
+              - { symbol: 'ASML', label: '阿斯麦' }
+          - title: 金融与地产
+            items:
+              - { symbol: 'XLF', label: '美国金融 ETF' }
+              - { symbol: 'KRE', label: '区域银行 ETF' }
+              - { symbol: 'XHB', label: '住宅建筑 ETF' }
+          - title: 消费
+            items:
+              - { symbol: 'WMT', label: '沃尔玛' }
+              - { symbol: 'XLY', label: '可选消费 ETF' }
+              - { symbol: 'XLP', label: '必选消费 ETF' }
+          - title: 医疗
+            items:
+              - { symbol: 'XLV', label: '医疗行业 ETF' }
+              - { symbol: 'IBB', label: '生物科技 ETF' }
+              - { symbol: 'LLY', label: '礼来' }
+          - title: 军工
+            items:
+              - { symbol: 'ITA', label: '航空军工 ETF' }
+              - { symbol: 'XAR', label: '等权军工 ETF' }
+              - { symbol: 'LMT', label: '洛克希德·马丁' }
+          - title: 宏观与另类
+            items:
+              - { symbol: 'BTC-USD', label: '比特币' }
+              - { symbol: 'ETH-USD', label: '以太坊' }
+              - { symbol: 'BDRY', label: '干散货运价代理' }
