@@ -1,0 +1,55 @@
+# ============================================================================
+# dsh-finance-dock —— DSH bundle patch
+# ============================================================================
+# 宿主半（lib/index.js）只做行情中转：
+#   GET /dsh-finance/ping            配置（刷新间隔 / 配色 / 分组监视列表）
+#   GET /dsh-finance/quotes?symbols= 逐标的行情（Yahoo chart API，cur 走本机代理）
+# 客户端半（lib/client.js）是右侧栏 tab：分组列表 + 涨跌幅 + sparkline，自动刷新。
+#
+# 数据源是 Yahoo Finance 的 chart 接口：免 key，一条请求同时给最新价、前收与历史点位
+# （sparkline 直接用它的收盘序列）。监视列表、刷新频率、红绿习惯都在这里改。
+#
+# 安装：
+#   plugin_manager install_bundle  target=link:E:\development\dsh-finance-dock
+# ⚠️ 客户端半边改动要重启应用。
+# ============================================================================
+
+- insert:
+    - id: dsh-finance-dock
+      name: dsh-finance-dock
+      config:
+        # 走本机代理（Yahoo 在墙外）
+        proxy: 'http://127.0.0.1:7897'
+        # 取多少历史点位给 sparkline 用
+        range: '1mo'
+        interval: '1d'
+        # 宿主侧缓存；客户端默认 60 秒刷一次
+        cacheTtlMs: 30000
+        refreshMs: 60000
+        # 涨跌配色：cn = 红涨绿跌（中式），intl = 绿涨红跌
+        colorScheme: 'cn'
+        # 监视列表：group → items。symbol 用 Yahoo 的代码
+        groups:
+          - title: 股市
+            items:
+              - { symbol: '^GSPC', label: '标普500' }
+              - { symbol: '^IXIC', label: '纳斯达克' }
+              - { symbol: '^N225', label: '日经225' }
+              - { symbol: '^HSI', label: '恒生指数' }
+              - { symbol: '000001.SS', label: '上证指数' }
+          - title: 商品
+            items:
+              - { symbol: 'GC=F', label: '黄金' }
+              - { symbol: 'CL=F', label: 'WTI 原油' }
+          - title: 汇率
+            items:
+              - { symbol: 'CNY=X', label: '美元/人民币' }
+              - { symbol: 'EURUSD=X', label: '欧元/美元' }
+              - { symbol: 'DX-Y.NYB', label: '美元指数' }
+          - title: 加密
+            items:
+              - { symbol: 'BTC-USD', label: 'BTC' }
+              - { symbol: 'ETH-USD', label: 'ETH' }
+          - title: 利率
+            items:
+              - { symbol: '^TNX', label: '美债10Y收益率' }
