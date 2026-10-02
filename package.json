@@ -1,7 +1,7 @@
 {
   "name": "dsh-finance-dock",
-  "version": "0.1.0",
-  "description": "DSH 右侧栏的金融终端：跨资产监视列表（股指/商品/汇率/加密/利率），带 sparkline 与自动刷新，行情经宿主中转（免 key、走本机代理）。",
+  "version": "0.2.0",
+  "description": "DSH 右侧栏的金融终端：跨资产行情 + 会转的地球 + 风险偏好读数 + 中文说明 + 相关资讯，并且能和 Agent 双向对话（finance_panel 工具）。",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -11,7 +11,9 @@
   },
   "files": [
     "lib",
-    "cordis.patch.yml"
+    "vendor",
+    "cordis.patch.yml",
+    "icon.svg"
   ],
   "keywords": [
     "dsh",
@@ -21,7 +23,9 @@
     "finance",
     "market",
     "sidebar",
-    "ticker"
+    "ticker",
+    "three.js",
+    "globe"
   ],
   "author": "lemonhall",
   "license": "MIT",
@@ -35,7 +39,7 @@
   },
   "meta": {
     "title": "金融终端",
-    "description": "右侧栏一个 tab：跨资产行情监视列表，涨跌幅 + 迷你走势图，自动刷新；监视列表在配置里改。"
+    "description": "右侧栏一个 tab：13 类 48 个标的的行情、3D 地球、风险偏好读数、中文说明与相关资讯；点一下标的，地球会转过去停下 10 秒。"
   },
   "icon": "./icon.svg",
   "dsh": {
